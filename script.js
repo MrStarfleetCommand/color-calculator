@@ -5,12 +5,22 @@
 		event.preventDefault();
 
 		const formData = new FormData(form);
-		const backgroundColor = formData.get('background-color');
-		const foregroundColor = formData.get('foreground-color');
+		const bgColor = formData.get('background-color');
+		const fgColor = formData.get('foreground-color');
 		const opacity = formData.get('opacity');
 
-		console.log(backgroundColor);
-		console.log(foregroundColor);
-		console.log(opacity);
+		const bgColorR = parseInt(bgColor[1] + bgColor[2], 16);
+		const bgColorG = parseInt(bgColor[3] + bgColor[4], 16);
+		const bgColorB = parseInt(bgColor[5] + bgColor[6], 16);
+
+		const fgColorR = parseInt(fgColor[1] + fgColor[2], 16);
+		const fgColorG = parseInt(fgColor[3] + fgColor[4], 16);
+		const fgColorB = parseInt(fgColor[5] + fgColor[6], 16);
+
+		const finalR = (fgColorR - bgColorR * (1 - (opacity / 100))) / (opacity / 100)
+		const finalG = (fgColorG - bgColorG * (1 - (opacity / 100))) / (opacity / 100)
+		const finalB = (fgColorB - bgColorB * (1 - (opacity / 100))) / (opacity / 100)
+
+		alert(`rgb(${finalR} ${finalG} ${finalB} / ${opacity}%)`);
 	});
 })();
