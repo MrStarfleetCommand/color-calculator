@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Color Calculator</title>
+		<link rel="stylesheet" href="/styles.css">
+	</head>
+	<body>
+		<h1>Color Calculator</h1>
+		<form>
+			<div>
+				<label for="background-color">Background color:</label>
+				<input required type="color" name="background-color" id="background-color" value="#000000">
+			</div>
+			<div>
+				<label for="foreground-color">Desired foreground color:</label>
+				<input required type="color" name="foreground-color" id="foreground-color" value="#660000">
+			</div>
+			<div>
+				<label for="opacity">Desired opacity:</label>
+				<input required type="range" name="opacity" id="opacity">
+			</div>
+			<input type="submit" value="Submit" id="button">
+		</form>
+		<script src="script.js"></script>
+	</body>
+</html>
