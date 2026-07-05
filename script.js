@@ -21,6 +21,10 @@
 		const finalG = Math.round((fgColorG - bgColorG * (1 - (opacity / 100))) / (opacity / 100))
 		const finalB = Math.round((fgColorB - bgColorB * (1 - (opacity / 100))) / (opacity / 100))
 
-		alert(`rgb(${finalR} ${finalG} ${finalB} / ${opacity}%)`);
+		if (finalR > 255 || finalG > 255 || finalB > 255){
+			alert('No such color at this opacity setting');
+		} else {
+			alert(`rgb(${finalR} ${finalG} ${finalB} / ${opacity}%)`);
+		}
 	});
 })();
