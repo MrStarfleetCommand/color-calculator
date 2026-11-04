@@ -1,2 +1,2 @@
 # color-calculator
-A tool for calculating colors for web design
+A collection of tools for working with web colors
