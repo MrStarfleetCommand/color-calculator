@@ -44,7 +44,7 @@
 	}
 
 	function hexToRgb(value) {
-		return value.split('').shift().join('').match(/.{2}/g).map(val => parseInt(val, 16)).join(', ');
+		return value.split('').slice(1).join('').match(/.{2}/g).map(val => parseInt(val, 16)).join(', ');
 	}
 
 	function hexToYcbcr(value) {
