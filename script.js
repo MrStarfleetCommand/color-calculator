@@ -44,12 +44,7 @@
 	}
 
 	function isValid(rgb) {
-		for (const val of rgb.split(', ')) {
-			if (val > 255 || val < 0) {
-				return false;
-			}
-		}
-		return true;
+		return rgb.split(', ').every(n => n <= 255 && n >= 0);
 	}
 
 	function hexToRgb(value) {
