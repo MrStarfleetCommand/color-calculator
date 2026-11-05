@@ -7,21 +7,43 @@
 	</head>
 	<body>
 		<h1>Color Calculator</h1>
-		<form>
-			<div>
-				<label for="background-color">Background color:</label>
-				<input required type="color" name="background-color" id="background-color" value="#000000">
-			</div>
-			<div>
-				<label for="foreground-color">Desired foreground color:</label>
-				<input required type="color" name="foreground-color" id="foreground-color" value="#660000">
-			</div>
-			<div>
-				<label for="opacity">Desired opacity:</label>
-				<input required type="range" name="opacity" id="opacity" min="1" max="99">
-			</div>
-			<input type="submit" value="Submit" id="button">
-		</form>
+		<section>
+			<h2>Color coordinate converter</h2>
+			<p>This tool allows you to pick a color and see how it is represented in several different color systems, or specify a color in one of said systems to see how it is represented in the others. For now, the only supported color systems are RGB and YC<sub>b</sub>C<sub>r</sub>.</p>
+			<form id="converter">
+				<div>
+					<label for="converter-color">Background color:</label>
+					<input type="color" id="converter-color" name="color" value="rgb(255 0 0)">
+				</div>
+				<div>
+					<label for="converter-rgb">RGB:</label>
+					<input type="text" id="converter-rgb" name="rgb" value="255, 0, 0">
+				</div>
+				<div>
+					<label for="converter-ycbcr">YC<sub>b</sub>C<sub>r</sub>:</label>
+					<input type="text" id="converter-ycbcr" name="ycbcr" value="255, 127.5, 127.5">
+				</div>
+			</form>
+		</section>
+		<section>
+			<h2>Find overlay color</h2>
+			<p>This tool finds a partially-transparent color that, when layered over a given background color, produces the desired resulting color. In web design, using transparent colors allows you to change a background color without needing to adjust all the colors that appear on top of it.</p>
+			<form id="overlay">
+				<div>
+					<label for="overlay-background-color">Background color:</label>
+					<input required type="color" id="overlay-background-color" name="background-color" value="#000000">
+				</div>
+				<div>
+					<label for="overlay-foreground-color">Desired foreground color:</label>
+					<input required type="color" id="overlay-foreground-color" name="foreground-color" value="#660000">
+				</div>
+				<div>
+					<label for="overlay-opacity">Desired opacity:</label>
+					<input required type="range" id="overlay-opacity" name="opacity" min="1" max="99">
+				</div>
+				<input type="submit" value="Submit" id="overlay-submit">
+			</form>
+		</section>
 		<script src="script.js"></script>
 	</body>
 </html>
