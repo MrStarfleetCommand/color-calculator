@@ -30,17 +30,26 @@
 
 	for (const input of document.querySelectorAll('#converter input')) {
 		input.addEventListener('input', () => {
-			if (input.id === 'converter-color') {
+			if (input.id === 'converter-color' && isValid(hexToRgb(input.value))) {
 				document.querySelector('#converter-rgb').value = hexToRgb(input.value);
 				document.querySelector('#converter-ycbcr').value = hexToYcbcr(input.value);
-			} else if (input.id === 'converter-rgb') {
+			} else if (input.id === 'converter-rgb' && isValid(input.value)) {
 				document.querySelector('#converter-color').value = rgbToHex(input.value);
 				document.querySelector('#converter-ycbcr').value = rgbToYcbcr(input.value);
-			} else if (input.id === 'converter-ycbcr') {
+			} else if (input.id === 'converter-ycbcr' && isValid(ycbcrToRgb(input.value))) {
 				document.querySelector('#converter-color').value = ycbcrToHex(input.value);
 				document.querySelector('#converter-rgb').value = ycbcrToRgb(input.value);
 			}
 		});
+	}
+
+	function isValid(rgb) {
+		for (const val of rgb.split(', ')) {
+			if (val > 255 || val < 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	function hexToRgb(value) {
