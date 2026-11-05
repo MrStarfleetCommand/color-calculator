@@ -65,15 +65,15 @@
 	}
 
 	function ycbcrToHex(value) {
+		return rgbToHex(ycbcrToRgb(value));
+	}
+
+	function ycbcrToRgb(value) {
 		const vals = value.split(', ').map(Number);
 		return [
 			vals[0] + (vals[2] - 127.5) * 1.402,
 			vals[0] - (vals[1] - 127.5) * 0.344 - (vals[2] - 127.5) * 0.714,
 			vals[0] + (vals[1] - 127.5) * 1.772,
 		].join(', ');
-	}
-
-	function ycbcrToRgb(value) {
-		return hexToRgb(ycbcrToHex(value));
 	}
 })();
