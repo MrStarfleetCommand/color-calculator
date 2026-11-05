@@ -76,9 +76,9 @@
 	function ycbcrToRgb(value) {
 		const vals = value.split(', ').map(Number);
 		return [
-			Math.round(vals[0] + vals[2] * 1.402),
-			Math.round(vals[0] - vals[1] * 0.344 - vals[2] * 0.714),
-			Math.round(vals[0] + vals[1] * 1.772),
+			Math.min(255, Math.max(0, Math.round(vals[0] + vals[2] * 1.402))),
+			Math.min(255, Math.max(0, Math.round(vals[0] - vals[1] * 0.344 - vals[2] * 0.714))),
+			Math.min(255, Math.max(0, Math.round(vals[0] + vals[1] * 1.772))),
 		].join(', ');
 	}
 })();
