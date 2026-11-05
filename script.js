@@ -1,10 +1,10 @@
 (() => {
-	const form = document.querySelector('form');
+	const overlayForm = document.querySelector('#overlay');
 
-	form.addEventListener('submit', event => {
+	overlayForm.addEventListener('submit', event => {
 		event.preventDefault();
 
-		const formData = new FormData(form);
+		const formData = new FormData(overlayForm);
 		const bgColor = formData.get('background-color');
 		const fgColor = formData.get('foreground-color');
 		const opacity = formData.get('opacity');
@@ -21,10 +21,59 @@
 		const finalG = Math.round((fgColorG - bgColorG * (1 - (opacity / 100))) / (opacity / 100));
 		const finalB = Math.round((fgColorB - bgColorB * (1 - (opacity / 100))) / (opacity / 100));
 
-		if (finalR > 255 || finalG > 255 || finalB > 255 || finalR < 0 || finalG < 0 || finalB < 0){
+		if (finalR > 255 || finalG > 255 || finalB > 255 || finalR < 0 || finalG < 0 || finalB < 0) {
 			alert('No such color at this opacity setting');
 		} else {
 			alert(`rgb(${finalR} ${finalG} ${finalB} / ${opacity}%)`);
 		}
 	});
+
+	for (const input of document.querySelectorAll('#converter input')) {
+		input.addEventListener('input', () => {
+			if (input.id === 'converter-color') {
+				document.querySelector('#converter-rgb').value = hexToRgb(input.value);
+				document.querySelector('#converter-ycbcr').value = hexToYcbcr(input.value);
+			} else if (input.id === 'converter-rgb') {
+				document.querySelector('#converter-color').value = rgbToHex(input.value);
+				document.querySelector('#converter-ycbcr').value = rgbToYcbcr(input.value);
+			} else if (input.id === 'converter-ycbcr') {
+				document.querySelector('#converter-color').value = ycbcrToHex(input.value);
+				document.querySelector('#converter-rgb').value = ycbcrToRgb(input.value);
+			}
+		});
+	}
+
+	function hexToRgb(value) {
+		return value.split('').shift().join('').match(/.{2}/g).map(val => parseInt(val, 16)).join(', ');
+	}
+
+	function hexToYcbcr(value) {
+		return rgbToYcbcr(hexToRgb(value));
+	}
+
+	function rgbToHex(value) {
+		return `#${value.split(', ').map(n => Number(n).toString(16).padStart(2, 0)).join('')}`;
+	}
+
+	function rgbToYcbcr(value) {
+		const vals = value.split(', ').map(Number);
+		return [
+			000.0 + vals[0] * 0.299 + vals[1] * 0.587 + vals[2] * 0.114,
+			127.5 - vals[0] * 0.169 - vals[1] * 0.331 + vals[2] * 0.500,
+			127.5 + vals[0] * 0.500 - vals[1] * 0.419 - vals[2] * 0.081,
+		].join(', ');
+	}
+
+	function ycbcrToHex(value) {
+		const vals = value.split(', ').map(Number);
+		return [
+			vals[0] + (vals[1] - 127.5) * 0.000 + (vals[2] - 127.5) * 1.402,
+			vals[0] - (vals[1] - 127.5) * 0.344 - (vals[2] - 127.5) * 0.714,
+			vals[0] + (vals[1] - 127.5) * 1.772 + (vals[2] - 127.5) * 0.000,
+		].join(', ');
+	}
+
+	function ycbcrToRgb(value) {
+		return hexToRgb(ycbcrToHex(value));
+	}
 })();
