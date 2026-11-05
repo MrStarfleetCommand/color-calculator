@@ -64,8 +64,8 @@
 		const vals = value.split(', ').map(Number);
 		return [
 			Math.round(vals[0] * 0.299 + vals[1] * 0.587 + vals[2] * 0.114),
-			Math.round(127.5 - vals[0] * 0.169 - vals[1] * 0.331 + vals[2] * 0.5),
-			Math.round(127.5 + vals[0] * 0.5 - vals[1] * 0.419 - vals[2] * 0.081),
+			Math.round(vals[0] * -0.169 - vals[1] * 0.331 + vals[2] * 0.5),
+			Math.round(vals[0] * 0.5 - vals[1] * 0.419 - vals[2] * 0.081),
 		].join(', ');
 	}
 
@@ -76,9 +76,9 @@
 	function ycbcrToRgb(value) {
 		const vals = value.split(', ').map(Number);
 		return [
-			Math.round(vals[0] + (vals[2] - 127.5) * 1.402),
-			Math.round(vals[0] - (vals[1] - 127.5) * 0.344 - (vals[2] - 127.5) * 0.714),
-			Math.round(vals[0] + (vals[1] - 127.5) * 1.772),
+			Math.round(vals[0] + vals[2] * 1.402),
+			Math.round(vals[0] - vals[1] * 0.344 - vals[2] * 0.714),
+			Math.round(vals[0] + vals[1] * 1.772),
 		].join(', ');
 	}
 })();
