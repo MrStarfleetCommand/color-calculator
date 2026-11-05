@@ -44,7 +44,8 @@
 	}
 
 	function isValid(rgb) {
-		return rgb.split(', ').every(n => n <= 255 && n >= 0);
+		const vals = rgb.split(', ');
+		return vals.length === 3 && vals.every(n => n <= 255 && n >= 0);
 	}
 
 	function hexToRgb(value) {
