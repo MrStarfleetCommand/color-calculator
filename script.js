@@ -1,5 +1,15 @@
 (() => {
 	const overlayForm = document.querySelector('#overlay');
+	const opacityRange = document.querySelector('#overlay-opacity--range');
+	const opacityNumber = document.querySelector('#overlay-opacity--number');
+
+	opacityRange.addEventListener('input', () => {
+		opacityNumber.value = opacityRange.value;
+	});
+
+	opacityNumber.addEventListener('input', () => {
+		opacityRange.value = opacityNumber.value;
+	});
 
 	overlayForm.addEventListener('submit', event => {
 		event.preventDefault();
@@ -7,7 +17,7 @@
 		const formData = new FormData(overlayForm);
 		const bgColor = formData.get('background-color');
 		const fgColor = formData.get('foreground-color');
-		const opacity = formData.get('opacity');
+		const opacity = formData.get('opacity--range');
 
 		const bgColorR = parseInt(bgColor[1] + bgColor[2], 16);
 		const bgColorG = parseInt(bgColor[3] + bgColor[4], 16);
